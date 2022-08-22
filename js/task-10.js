@@ -34,48 +34,37 @@ function getRandomHexColor() {
   return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
 }
 
-const btnCollection = document.querySelector('#boxes');
+const boxesBlock = document.querySelector('#boxes');
 const refs = {
   id: document.querySelector('#controls'),
   input: document.querySelector('input'),
-  btnCreate: document.querySelector('[data-create]'),
-  btnDestroy: document.querySelector('[data-destroy]'),
-  
-};
+  buttonCreate: document.querySelector('[data-create]'),
+  buttonDestroy: document.querySelector('[data-destroy]'),
+}
 
-refs.btnCreate.addEventListener('click', onInputClick);
-function onInputClick(event) {
-  const newDiv = Number(refs.input.value);
-  createBoxes(newDiv);
-};
+refs.buttonCreate.addEventListener('click', createBoxes);
 
 function createBoxes(amount) {
-  
+  const boxes = [];
+  amount = refs.input.value;
+
   const width = 30;
   const height = 30;
-  let addValue = 0;
-
-  const elements = [];
-
-  for (let i = 1; i < amount; i += 1) {
-      // console.log("amount", amount);
-    
-
-    const divEl = document.createElement('div');
-    divEl.classList.add('box');
-    divEl.style.backgroundColor = getRandomHexColor();
-    divEl.style.width = width + addValue + `px`;
-    divEl.style.height = height + addValue + `px`;
+  let addValue = 0
+  
+  for (let i = 1; i <= amount; i += 1) {
+    const box = document.createElement('div');
+    box.style.width = width + addValue + 'px';
+    box.style.height = height + addValue + 'px';
+    box.style.backgroundColor = getRandomHexColor();
     addValue += 10;
-    elements.push(divEl);
-    }
-  btnCollection.append(...elements);
-};
+    boxes.push(box);
+  }
+  boxesBlock.append(...boxes);
+}
 
-refs.btnDestroy.addEventListener('click', destroyBoxes);
-  function destroyBoxes() {
-    btnCollection.innerHTML = "";
-    refs.inputEl.value = "";
+refs.buttonDestroy.addEventListener('click', destroyBoxes);
 
-    console.log("div#boxes очищен!", amount);
-};
+function destroyBoxes() {
+  boxesBlock.innerHTML = "";
+}
