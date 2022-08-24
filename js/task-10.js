@@ -42,16 +42,16 @@ const refs = {
   buttonDestroy: document.querySelector('[data-destroy]'),
 }
 
+const width = 30;
+const height = 30;
+let addValue = 0;
+
 refs.buttonCreate.addEventListener('click', createBoxes);
 
 function createBoxes(amount) {
   const boxes = [];
   amount = refs.input.value;
 
-  const width = 30;
-  const height = 30;
-  let addValue = 0
-  
   for (let i = 1; i <= amount; i += 1) {
     const box = document.createElement('div');
     box.style.width = width + addValue + 'px';
@@ -62,7 +62,6 @@ function createBoxes(amount) {
   }
   boxesBlock.append(...boxes);
 }
-
 refs.buttonDestroy.addEventListener('click', destroyBoxes);
 
 function destroyBoxes() {
